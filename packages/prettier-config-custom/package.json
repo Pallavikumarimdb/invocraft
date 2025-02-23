@@ -1,0 +1,13 @@
+{
+  "name": "prettier-config-custom",
+  "version": "1.0.0",
+  "private": true,
+  "files": [
+    "prettier.config.js"
+  ],
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "5.2.0",
+    "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "0.6.9"
+  }
+}
