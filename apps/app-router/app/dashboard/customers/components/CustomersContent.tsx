@@ -111,7 +111,7 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
         {filteredCustomers.map((customer) => (
           <Card 
             key={customer.id} 
-            className="hover:shadow-md transition-shadow cursor-pointer"
+            className="shadow-xl transition-shadow cursor-pointer"
             onClick={() => handleCustomerClick(customer)}
           >
             <CardContent className="p-6">

@@ -1,17 +1,17 @@
 "use client";
 
-// import { useState } from "react";
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardHeader,
-//   CardTitle,
-// } from "@/components/ui/card";
-// import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
-// import { Building2, MapPin, Receipt, X } from "lucide-react";
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
+import {Button} from "@/components/ui/Button"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Building2, MapPin, Receipt, X } from "lucide-react";
 import { CompanyContent } from "./components/CompanyContent";
 
 // Mock company data

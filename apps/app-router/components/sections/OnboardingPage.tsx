@@ -26,6 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import apiClient from "@/services/apiClient";
+import { GlowingEffect } from "../ui/glowing-effect";
 
 
 const formSchema = z.object({
@@ -56,23 +57,23 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [logoPreview, setLogoPreview] = useState("");
 
-  const [isSubscribed, setIsSubscribed] = useState(false); 
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
-  const [isLoading, setIsLoading] =    useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   async function handleGoToDashboard(event: React.SyntheticEvent) {
     event.preventDefault();
-    setIsLoading(true); 
-  
+    setIsLoading(true);
+
     try {
       const formData = form.getValues();
-  
+
       // // Check if the user is authenticated
       // const isAuthenticated = await apiClient.get("/auth/check-session"); // Endpoint to check session validity
       // if (!isAuthenticated.data?.isLoggedIn) {
       //   throw new Error("You must be logged in to complete the onboarding.");
       // }
-  
+
 
       const { data } = await apiClient.post("/onboarding", {
         companyName: formData.companyName,
@@ -84,10 +85,10 @@ export default function OnboardingPage() {
         zipCode: formData.zipCode,
         country: formData.country,
         taxId: formData.taxId,
-        vatNumber: formData.vatNumber || null, 
+        vatNumber: formData.vatNumber || null,
       });
-  
-      router.push("/app/dashboard");
+
+      router.push(" /dashboard");
     } catch (error) {
       console.error("Error during onboarding:", error);
       // toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
@@ -146,23 +147,25 @@ export default function OnboardingPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+
+    <div className="min-h-screen bg-slate-300 bg-dot-black/[0.5] relative">
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Progress Steps */}
+        
         <div className="max-w-4xl mx-auto mb-12">
           <div className="flex justify-between items-center relative">
             {steps.map((s, i) => (
               <div key={i} className="flex flex-col items-center relative z-10">
                 <div
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${i <= step
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-100 text-gray-400"
+                    ? "bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] text-slate-300"
+                    : "text-gray-900"
                     } transition-all duration-200`}
                 >
                   <s.icon className="w-6 h-6" />
                 </div>
                 <span
-                  className={`mt-2 text-sm font-medium ${i <= step ? "text-blue-600" : "text-gray-400"
+                  className={`mt-2 text-sm font-medium ${i <= step ? "text-[#030303]" : "text-gray-700"
                     }`}
                 >
                   {s.title}
@@ -183,13 +186,22 @@ export default function OnboardingPage() {
           <Form {...form}>
             <form className="space-y-8">
               {step === 0 && (
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
+                <Card className="border-0 shadow-xl bg-transparent backdrop-blur">
+                  <GlowingEffect
+                    blur={0}
+                    borderWidth={3}
+                    spread={80}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
                   <CardHeader className="space-y-6 text-center pb-10">
-                    <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                      <Building className="w-8 h-8 text-blue-600" />
+                    <div className="mx-auto w-16 h-16 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)]  rounded-full flex items-center justify-center">
+                      <Building className="w-8 h-8 text-slate-300" />
                     </div>
                     <div>
-                      <CardTitle className="text-3xl font-bold mb-4">Welcome to InvoiceApp</CardTitle>
+                      <CardTitle className="text-3xl font-bold mb-4">Welcome to InvoCraft</CardTitle>
                       <CardDescription className="text-lg">
                         Let's get your business set up in just a few steps. We'll help you:
                       </CardDescription>
@@ -203,10 +215,10 @@ export default function OnboardingPage() {
                         { icon: Receipt, text: "Configure tax information" },
                       ].map((item, i) => (
                         <div key={i} className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
-                            <item.icon className="w-5 h-5 text-blue-600" />
+                          <div className="w-10 h-10 rounded-full bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)]  flex items-center justify-center">
+                            <item.icon className="w-5 h-5 text-slate-300" />
                           </div>
-                          <span className="text-gray-600">{item.text}</span>
+                          <span className="text-gray-900">{item.text}</span>
                         </div>
                       ))}
                     </div>
@@ -225,7 +237,16 @@ export default function OnboardingPage() {
               )}
 
               {step === 1 && (
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
+                <Card className="border-0 shadow-xl  backdrop-blur">
+                  <GlowingEffect
+                    blur={0}
+                    borderWidth={3}
+                    spread={80}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">What type of business are you?</CardTitle>
                     <CardDescription>Select the option that best describes your business</CardDescription>
@@ -239,14 +260,14 @@ export default function OnboardingPage() {
                     ].map((type, i) => (
                       <div
                         key={i}
-                        className={`p-6 rounded-lg border-2 cursor-pointer transition-all ${form.watch("businessType") === type.title
+                        className={`p-6 rounded-lg border-2 border-gray-500 cursor-pointer transition-all ${form.watch("businessType") === type.title
                           ? "border-blue-600 bg-blue-50"
-                          : "border-gray-200 hover:border-blue-200 hover:bg-gray-50"
+                          : "border-gray-200 hover:border-blue-200 hover:text-slate-100 hover:bg-gray-900"
                           }`}
                         onClick={() => form.setValue("businessType", type.title)}
                       >
                         <h3 className="font-semibold mb-1">{type.title}</h3>
-                        <p className="text-sm text-gray-500">{type.description}</p>
+                        <p className="text-sm text-gray-500 hover:text-slate-300">{type.description}</p>
                       </div>
                     ))}
                   </CardContent>
@@ -273,7 +294,16 @@ export default function OnboardingPage() {
               )}
 
               {step === 2 && (
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
+                <Card className="border-0 shadow-xl  backdrop-blur">
+                  <GlowingEffect
+                    blur={0}
+                    borderWidth={3}
+                    spread={80}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">What's your company name?</CardTitle>
                     <CardDescription>This will appear on your invoices and profile</CardDescription>
@@ -319,7 +349,16 @@ export default function OnboardingPage() {
               )}
 
               {step === 3 && (
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
+                <Card className="border-0 shadow-xl backdrop-blur">
+                  <GlowingEffect
+                    blur={0}
+                    borderWidth={3}
+                    spread={80}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">Add your company logo</CardTitle>
                     <CardDescription>This will be displayed on your invoices and profile</CardDescription>
@@ -328,7 +367,7 @@ export default function OnboardingPage() {
                     <div className="space-y-6">
                       <div className="flex items-center justify-center">
                         <div
-                          className={`w-full h-40 border-2 border-dashed rounded-xl flex items-center justify-center transition-all ${logoPreview ? "border-blue-600 bg-blue-50" : "border-gray-300 bg-gray-50"
+                          className={`w-full h-40 border-2 border-dashed rounded-xl flex items-center justify-center transition-all ${logoPreview ? "border-blue-600 bg-blue-50" : "border-gray-300 bg-gray-400"
                             }`}
                         >
                           {logoPreview ? (
@@ -401,7 +440,16 @@ export default function OnboardingPage() {
 
 
               {step === 4 && (
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
+                <Card className="border-0 shadow-xl backdrop-blur">
+                  <GlowingEffect
+                    blur={0}
+                    borderWidth={3}
+                    spread={80}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">Where are you located?</CardTitle>
                     <CardDescription>Enter your business address details</CardDescription>
@@ -412,7 +460,7 @@ export default function OnboardingPage() {
                       name="streetAddress"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Street Address</FormLabel>
+                          <FormLabel><span className="text-slate-900">Street Address</span></FormLabel>
                           <FormControl>
                             <Input placeholder="Enter street address" {...field} />
                           </FormControl>
@@ -427,7 +475,7 @@ export default function OnboardingPage() {
                         name="city"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>City</FormLabel>
+                            <FormLabel><span className="text-slate-900">City</span></FormLabel>
                             <FormControl>
                               <Input placeholder="Enter city" {...field} />
                             </FormControl>
@@ -441,7 +489,7 @@ export default function OnboardingPage() {
                         name="state"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>State</FormLabel>
+                            <FormLabel><span className="text-slate-900">State</span></FormLabel>
                             <FormControl>
                               <Input placeholder="Enter state" {...field} />
                             </FormControl>
@@ -457,7 +505,7 @@ export default function OnboardingPage() {
                         name="zipCode"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>ZIP Code</FormLabel>
+                            <FormLabel><span className="text-slate-900">ZIP Code</span></FormLabel>
                             <FormControl>
                               <Input placeholder="Enter ZIP code" {...field} />
                             </FormControl>
@@ -471,7 +519,7 @@ export default function OnboardingPage() {
                         name="country"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Country</FormLabel>
+                            <FormLabel><span className="text-slate-900">Country</span></FormLabel>
                             <FormControl>
                               <Input placeholder="Enter country" {...field} />
                             </FormControl>
@@ -504,7 +552,16 @@ export default function OnboardingPage() {
               )}
 
               {step === 5 && (
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
+                <Card className="border-0 shadow-xl  backdrop-blur">
+                  <GlowingEffect
+                    blur={0}
+                    borderWidth={3}
+                    spread={80}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">Tax Information</CardTitle>
                     <CardDescription>Add your business tax details</CardDescription>
@@ -515,7 +572,7 @@ export default function OnboardingPage() {
                       name="taxId"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Tax ID / EIN</FormLabel>
+                          <FormLabel><span className="text-slate-900">Tax ID / EIN</span></FormLabel>
                           <FormControl>
                             <Input placeholder="Enter Tax ID" {...field} />
                           </FormControl>
@@ -529,7 +586,7 @@ export default function OnboardingPage() {
                       name="vatNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>VAT Number (Optional)</FormLabel>
+                          <FormLabel><span className="text-slate-900">VAT Number (Optional)</span></FormLabel>
                           <FormControl>
                             <Input placeholder="Enter VAT number" {...field} />
                           </FormControl>
@@ -561,10 +618,19 @@ export default function OnboardingPage() {
               )}
 
               {step === 6 && (
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
+                <Card className="border-0 shadow-xl backdrop-blur">
+                  <GlowingEffect
+                    blur={0}
+                    borderWidth={3}
+                    spread={80}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
                   <CardHeader className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <ClipboardCheck className="w-6 h-6 text-blue-600" />
+                      <ClipboardCheck className="w-6 h-6 text-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)]" />
                       <CardTitle className="text-2xl font-bold">Review Your Details</CardTitle>
                     </div>
                     <CardDescription>
@@ -579,7 +645,7 @@ export default function OnboardingPage() {
                           <img
                             src={logoPreview}
                             alt="Company logo"
-                            className="w-16 h-16 rounded-lg object-contain bg-white shadow-sm"
+                            className="w-16 h-16 rounded-lg object-contain bg-slate-200 shadow-sm"
                           />
                         )}
                         <div className="flex-1">
@@ -593,9 +659,9 @@ export default function OnboardingPage() {
                       </div>
 
                       {/* Address Details */}
-                      <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+                      <div className=" rounded-lg p-4 space-y-4">
                         <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-blue-600" />
+                          <MapPin className="w-4 h-4 text-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)]" />
                           Business Address
                         </h4>
                         <div className="grid gap-3 text-sm">
@@ -627,9 +693,9 @@ export default function OnboardingPage() {
                       </div>
 
                       {/* Tax Information */}
-                      <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+                      <div className="rounded-lg p-4 space-y-4">
                         <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                          <Receipt className="w-4 h-4 text-blue-600" />
+                          <Receipt className="w-4 h-4 text-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)]" />
                           Tax Information
                         </h4>
                         <div className="grid gap-3 text-sm">
@@ -674,3 +740,12 @@ export default function OnboardingPage() {
     </div>
   );
 }
+
+const BottomGradient = () => {
+  return (
+    <>
+      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+    </>
+  );
+};

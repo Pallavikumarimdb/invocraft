@@ -1,6 +1,5 @@
 import { Inter, Work_Sans as WorkSans } from 'next/font/google'
 import '../styles/globals.css'
-// import { ThemeProvider } from '@/theme/theme-provider'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const workSans = WorkSans({
@@ -17,9 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${workSans.variable} font-inter`}>
-      {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
           {children}
-        {/* </ThemeProvider> */}
       </body>
     </html>
   )

@@ -88,13 +88,13 @@ export function InvoicesContent({ searchQuery, setSearchQuery }: InvoicesContent
   const getStatusColor = (status: Invoice["status"]) => {
     switch (status) {
       case "paid":
-        return "text-green-500 bg-green-50";
+        return "text-green-500 ";
       case "pending":
-        return "text-yellow-500 bg-yellow-50";
+        return "text-yellow-500";
       case "overdue":
-        return "text-red-500 bg-red-50";
+        return "text-red-500 ";
       default:
-        return "text-gray-500 bg-gray-50";
+        return "text-gray-500 bg-gray-100";
     }
   };
 
@@ -157,7 +157,7 @@ export function InvoicesContent({ searchQuery, setSearchQuery }: InvoicesContent
 
       <div className="grid gap-4">
         {filteredInvoices.map((invoice) => (
-          <Card key={invoice.id}>
+          <Card key={invoice.id} className="shadow-xl transition-shadow ">
             <CardContent className="p-6">
               <div className="flex justify-between items-center">
                 <div className="space-y-1">

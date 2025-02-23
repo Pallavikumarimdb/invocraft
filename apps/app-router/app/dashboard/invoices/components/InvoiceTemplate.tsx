@@ -27,7 +27,7 @@ export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
   };
 
   return (
-    <div className="bg-white p-8 shadow-lg max-w-4xl mx-auto">
+    <div className="bg-slate-300 rounded-2xl p-8 shadow-lg max-w-4xl mx-auto">
       {/* Header */}
       <div className="flex justify-between items-start mb-8">
         <div>

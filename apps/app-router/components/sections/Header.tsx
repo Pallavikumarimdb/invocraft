@@ -15,7 +15,7 @@ export default function Header() {
           <nav className="hidden ml-28 md:flex space-x-10">
             <Link
               href="#features"
-              className="text-slate-100  font-medium text-muted-foreground hover:text-foreground hover:border-b border-teal-500 transition-colors"
+              className="text-slate-100   font-medium text-muted-foreground hover:text-foreground hover:border-b border-teal-500 transition-colors "
             >
               Features
             </Link>

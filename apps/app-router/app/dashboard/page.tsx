@@ -70,10 +70,10 @@ export default function DashboardPage() {
 
 function DashboardContent() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 ">
       <div className="grid gap-4 md:grid-cols-3">
         {mockStats.map((stat) => (
-          <Card key={stat.name} className="border">
+          <Card key={stat.name} className="border border-gray-400">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-gray-500">
                 {stat.name}
@@ -98,8 +98,8 @@ function DashboardContent() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Recent Invoices</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-bold">Recent Invoices</CardTitle>
+          <CardDescription className="text-sm text-gray-400">
             Overview of your latest invoices
           </CardDescription>
         </CardHeader>
@@ -108,7 +108,7 @@ function DashboardContent() {
             {mockInvoices.map((invoice) => (
               <div
                 key={invoice.id}
-                className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                className="flex items-center justify-between border-b border-gray-400 pb-4 last:border-0 last:pb-0"
               >
                 <div>
                   <div className="font-medium">{invoice.customerName}</div>

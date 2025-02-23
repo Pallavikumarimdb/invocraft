@@ -134,10 +134,10 @@ export function LogoEditDialog({ isOpen, onClose, currentLogo, onSave }: LogoEdi
           </div>
         </div>
         <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={onClose}>
-            Cancel
+          <Button  onClick={onClose}>
+            <span className="text-slate-200">Cancel</span>
           </Button>
-          <Button
+          <Button variant="outline"
             onClick={() => {
               if (previewLogo) {
                 onSave(previewLogo);

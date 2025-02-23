@@ -22,11 +22,11 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
 
 const navigation = [
-  { name: "Dashboard", href: "/app/dashboard", icon: LayoutDashboard },
-  { name: "Customers", href: "/app/dashboard/customers", icon: Users },
-  { name: "Invoices", href: "/app/dashboard/invoices", icon: FileText },
-  { name: "Company", href: "/app/dashboard/company", icon: Building2 },
-  { name: "Settings", href: "/app/dashboard/settings", icon: Settings },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Customers", href: "/dashboard/customers", icon: Users },
+  { name: "Invoices", href: "/dashboard/invoices", icon: FileText },
+  { name: "Company", href: "/dashboard/company", icon: Building2 },
+  { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 export default function DashboardLayout({
@@ -44,20 +44,20 @@ export default function DashboardLayout({
       {/* Paywall */}
       {!isSubscribed && showPaywall && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur">
-          <Card className="w-full bg-white max-w-md mx-4 relative shadow-xl rounded-xl border border-gray-100">
-            <Button
-              variant="ghost"
-              size="icon"
+          <Card className="w-full bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] text-slate-100 max-w-md mx-4 relative shadow-xl rounded-xl border border-gray-100">
+            <button
+              // variant="ghost"
+              // size="icon"
               className="absolute right-2 top-2"
               onClick={() => setShowPaywall(false)}
             >
-              <X className="h-4 w-4 text-gray-500" />
-            </Button>
+              <X className="h-4 w-4 text-slate" />
+            </button>
             <CardHeader className="text-center py-8">
-              <CardTitle className="text-3xl font-extrabold text-gray-900">
-                Subscribe to Access Features
+              <CardTitle className="text-3xl font-extrabold ">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300">Subscribe to Access Features</span>
               </CardTitle>
-              <CardDescription className="mt-2 text-gray-700">
+              <CardDescription className="mt-2  text-slate-300">
                 Take your experience to the next level with our premium plan.
               </CardDescription>
             </CardHeader>
@@ -70,17 +70,20 @@ export default function DashboardLayout({
                   "Multi-User Access"
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
-                    <CheckCircle className="h-6 w-6 text-blue-600" />
-                    <p className="ml-4 text-lg text-gray-800 font-medium">
+                    <CheckCircle className="h-6 w-6 text-slate-300" />
+                    <p className="ml-4 text-lg text-slate-400 font-medium">
                       {feature}
                     </p>
                   </div>
                 ))}
               </div>
               <div className="mt-6 text-center">
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-full shadow-lg hover:from-blue-600 hover:to-indigo-600 transition duration-300" size="lg">
-                  Subscribe Now with Basic Plan - $10/month
-                </Button>
+                <button className="px-8 mt-10 py-2 rounded-full relative bg-slate-900 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600">
+                  <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+                  <span className="relative z-20">
+                    Get started for free
+                  </span>
+                </button>
               </div>
               <p className="my-4 text-sm text-gray-500 text-center">
                 No hidden fees.
@@ -90,7 +93,7 @@ export default function DashboardLayout({
         </div>
       )}
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#0f0e0d] bg-dot-slate/[0.4] relative text-slate-300">
         <div className="lg:hidden">
           <Button
             variant="ghost"
@@ -117,7 +120,7 @@ export default function DashboardLayout({
           )}
         </div>
         <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-          <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
+          <div className="flex min-h-0 flex-1 flex-col border-r border-gray-400 bg-[#0f0e0d] ">
             <div className="flex flex-1 flex-col overflow-y-auto px-4 py-4">
               <SidebarContent pathname={pathname} />
             </div>
@@ -137,37 +140,37 @@ function SidebarContent({ pathname }: { pathname: string }) {
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="space-y-8">
-        <div className="flex mt-2 items-center space-x-2">
+        <div className="flex mt-2 border-b border-gray-400 items-center space-x-2">
           <Logo />
         </div>
 
-        <nav className="flex-1 space-y-1">
+        <nav className="flex-1 space-y-3">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
               className={cn(
                 pathname === item.href
-                  ? "bg-blue-50 text-blue-600"
-                  : "text-gray-800 hover:bg-gray-50 hover:text-gray-900",
-                "group mt-10 flex items-center rounded-md px-3 py-2 text-sm font-medium"
+                  ? "bg-[#47506e] text-slate-200"
+                  : "text-gray-800 hover:bg-gray-800 hover:text-gray-600",
+                "group mt-14 flex items-center rounded-md px-3 py-2 text-sm  font-medium"
               )}
             >
               <item.icon
                 className={cn(
                   pathname === item.href
-                    ? "text-blue-600"
-                    : "text-blue-500 group-hover:text-gray-500",
+                    ? "text-slate-200"
+                    : "text-slate-400 group-hover:text-gray-500",
                   "mr-3 h-6 w-6 flex-shrink-0"
                 )}
               />
-              {item.name}
+              <span className="text-slate-300">{item.name}</span>
             </Link>
           ))}
         </nav>
       </div>
 
-      <div className="border-t pt-4">
+      <div className="border-t border-gray-400  pt-4">
         <Button
           variant="outline"
           className="w-full justify-start"

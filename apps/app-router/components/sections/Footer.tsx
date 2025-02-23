@@ -4,11 +4,11 @@ import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#030303]  border-t border-border">
+    <footer className="bg-[#0f0e0d]  border-t border-border">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-sm font-semibold text-foreground tracking-wider uppercase">Product</h3>
+            <h3 className="text-sm font-semibold text-slate-100 tracking-wider uppercase">Product</h3>
             <ul className="mt-4 space-y-4">
               <li>
                 <Link href="#" className=" text-[#8f9eb2] text-muted-foreground hover:text-foreground transition-colors">
@@ -33,7 +33,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-foreground tracking-wider uppercase">Company</h3>
+            <h3 className="text-sm font-semibold  text-slate-100  tracking-wider uppercase">Company</h3>
             <ul className="mt-4 space-y-4">
               <li>
                 <Link href="#" className=" text-[#8f9eb2] text-muted-foreground hover:text-foreground transition-colors">
@@ -58,7 +58,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-foreground tracking-wider uppercase">Legal</h3>
+            <h3 className="text-sm font-semibold  text-slate-100  tracking-wider uppercase">Legal</h3>
             <ul className="mt-4 space-y-4">
               <li>
                 <Link href="#" className=" text-[#8f9eb2] text-muted-foreground hover:text-foreground transition-colors">

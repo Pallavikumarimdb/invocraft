@@ -51,7 +51,7 @@ export default function Pricing() {
                 {plans.map((plan, index) => (
                   <motion.div
                     key={plan.name}
-                    className={`border border-teal-500 rounded-lg shadow-sm divide-y divide-border ${plan.name === "Professional" ? "bg-[#030303]  text-gray-100" : "bg-gray-300"}`}
+                    className={`border border-teal-500 rounded-lg shadow-sm divide-y divide-border ${plan.name === "Professional" ? "bg-[#0f0e0d]  text-gray-100" : "bg-gray-300"}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}

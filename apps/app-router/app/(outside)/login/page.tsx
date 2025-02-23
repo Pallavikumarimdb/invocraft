@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion"
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
 import { cn } from "../../../lib/utils";
@@ -10,14 +11,57 @@ export default function SignupFormDemo() {
     console.log("Form submitted");
   };
   return (
-    <div className="max-w-md w-full mx-auto mt-20 rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+    <div className="w-full h-screen bg-[#0f0e0d] bg-dot-white/[0.4] relative text-slate-300 flex items-center justify-center">
+              <div className="absolute inset-0 overflow-hidden ">
+                <ElegantShape
+                    delay={0.3}
+                    width={600}
+                    height={140}
+                    rotate={12}
+                    gradient="from-indigo-500/[0.15]"
+                    className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+                />
+
+                <ElegantShape
+                    delay={0.5}
+                    width={500}
+                    height={120}
+                    rotate={-15}
+                    gradient="from-rose-500/[0.15]"
+                    className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+                />
+
+                <ElegantShape
+                    delay={0.4}
+                    width={300}
+                    height={80}
+                    rotate={-8}
+                    gradient="from-violet-500/[0.15]"
+                    className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+                />
+
+                <ElegantShape
+                    delay={0.6}
+                    width={200}
+                    height={60}
+                    rotate={20}
+                    gradient="from-amber-500/[0.15]"
+                    className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+                />
+
+                <ElegantShape
+                    delay={0.7}
+                    width={150}
+                    height={40}
+                    rotate={-25}
+                    gradient="from-cyan-500/[0.15]"
+                    className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
+                />
+            </div>
+    <div className="max-w-md w-full relative z-10 mx-auto mt-20 rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Welcome to Aceternity
+        LogIn
       </h2>
-      <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Login to aceternity if you can because we don&apos;t have a login flow
-        yet
-      </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
@@ -38,14 +82,6 @@ export default function SignupFormDemo() {
           <Label htmlFor="password">Password</Label>
           <Input id="password" placeholder="••••••••" type="password" />
         </LabelInputContainer>
-        <LabelInputContainer className="mb-8">
-          <Label htmlFor="twitterpassword">Your twitter password</Label>
-          <Input
-            id="twitterpassword"
-            placeholder="••••••••"
-            type="twitterpassword"
-          />
-        </LabelInputContainer>
 
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
@@ -57,6 +93,7 @@ export default function SignupFormDemo() {
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
       </form>
+    </div>
     </div>
   );
 }
@@ -83,3 +120,71 @@ const LabelInputContainer = ({
     </div>
   );
 };
+
+
+function ElegantShape({
+  className,
+  delay = 0,
+  width = 400,
+  height = 100,
+  rotate = 0,
+  gradient = "from-white/[0.08]",
+}: {
+  className?: string
+  delay?: number
+  width?: number
+  height?: number
+  rotate?: number
+  gradient?: string
+}) {
+  return (
+      <motion.div
+          initial={{
+              opacity: 0,
+              y: -150,
+              rotate: rotate - 15,
+          }}
+          animate={{
+              opacity: 1,
+              y: 0,
+              rotate: rotate,
+          }}
+          transition={{
+              duration: 2.4,
+              delay,
+              ease: [0.23, 0.86, 0.39, 0.96],
+              opacity: { duration: 1.2 },
+          }}
+          className={cn("absolute", className)}
+      >
+          <motion.div
+              animate={{
+                  y: [0, 15, 0],
+              }}
+              transition={{
+                  duration: 12,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+              }}
+              style={{
+                  width,
+                  height,
+              }}
+              className="relative"
+          >
+              <div
+                  className={cn(
+                      "absolute inset-0 rounded-full",
+                      "bg-gradient-to-r to-transparent",
+                      gradient,
+                      "backdrop-blur-[2px] border-2 border-white/[0.15]",
+                      "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
+                      "after:absolute after:inset-0 after:rounded-full",
+                      "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]",
+                  )}
+              />
+          </motion.div>
+      </motion.div>
+  )
+}
+

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { Pacifico } from "next/font/google"
-import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { AnimatedTooltip } from "../ui/animated-tooltip"
 

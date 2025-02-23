@@ -61,7 +61,7 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
 
   return (
     <Dialog open={isOpen} onOpenChange={() => onClose()}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
           <div className="flex justify-between items-center">
             <DialogTitle>
@@ -81,9 +81,9 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 </div>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button variant="ghost" size="icon" className="text-red-500 hover:text-red-700">
+                    <button className="text-red-500 mr-10 hover:text-red-700">
                       <Trash2 className="h-4 w-4" />
-                    </Button>
+                    </button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
@@ -95,7 +95,7 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
                       <AlertDialogAction
-                        className="bg-red-500 hover:bg-red-700"
+                        className="bg-red-500 text-red-500  hover:bg-red-700"
                         onClick={() => {
                           if (customer?.id && onDelete) {
                             onDelete(customer.id);
@@ -114,18 +114,18 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
           <DialogDescription>
             {customer?.name ? 'View and edit customer details' : 'Enter new customer details'}
           </DialogDescription>
-          <div className="flex gap-2">
+          <div className="flex gap-2 pt-4 text-slate-300">
             <Button
               variant="outline"
               size="sm"
               onClick={() => setIsEditing(!isEditing)}
             >
               {isEditing ? (
-                <X className="h-4 w-4 mr-2" />
+                <X className="text-slate-400 h-4 w-4 mr-2" />
               ) : (
                 <Edit2 className="h-4 w-4 mr-2" />
               )}
-              {isEditing ? 'Cancel' : 'Edit'}
+              <span className="text-slate-300">{isEditing ? 'Cancel' : 'Edit'}</span>
             </Button>
           </div>
         </DialogHeader>
@@ -225,7 +225,7 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
           <DialogFooter>
             <Button onClick={handleSave}>
               <Save className="h-4 w-4 mr-2" />
-              Save Changes
+              <span className="text-slate-200">Save Changes</span>
             </Button>
           </DialogFooter>
         )}

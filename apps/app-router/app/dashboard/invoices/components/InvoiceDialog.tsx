@@ -137,7 +137,7 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
                           }
                         }}
                       >
-                        Delete
+                        <span className="text-red-500 hover:text-red-700">Delete</span>
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -174,7 +174,7 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
                   disabled={!isEditing}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a customer" />
+                    <SelectValue placeholder="Select a customer" className="text-slate-200" />
                   </SelectTrigger>
                   <SelectContent>
                     {mockCustomers.map((customer) => (
@@ -196,6 +196,7 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
               <div className="space-y-2">
                 <Label>Issue Date</Label>
                 <Input
+                 className="text-slate-200"
                   type="date"
                   value={editedInvoice?.dateIssued}
                   onChange={(e) => handleInputChange('dateIssued', e.target.value)}
@@ -295,21 +296,21 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
                     </div>
                     <div className="col-span-1">
                       <Label>Total</Label>
-                      <p className="mt-2 text-sm">
+                      <p className="mt-2 text-sm text-slate-200">
                         ${(item.quantity * item.unitPrice * (1 + (item.tax || 0))).toFixed(2)}
                       </p>
                     </div>
                     {isEditing && (
                       <div className="col-span-1">
-                        <Button
+                        <button
                           type="button"
-                          variant="ghost"
-                          size="icon"
+                          // variant="ghost"
+                          // size="icon"
                           onClick={() => removeItem(index)}
-                          className="mt-8 text-red-500 hover:text-red-700"
+                          className="mt-8 ml-6 bg-gray-800 rounded-2xl text-red-500 hover:text-red-700"
                         >
                           <Minus className="h-4 w-4" />
-                        </Button>
+                        </button>
                       </div>
                     )}
                   </div>
@@ -401,19 +402,19 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
           )}
           {isEditing && (
             <>
-              <Button variant="outline" onClick={() => {
+              <Button onClick={() => {
                 setIsEditing(false);
                 setEditedInvoice(invoice);
               }}>
-                Cancel
+                <span className="text-slate-200">Cancel</span>
               </Button>
-              <Button onClick={() => {
+              <Button variant="outline"  onClick={() => {
                 if (editedInvoice) {
                   onSave(editedInvoice);
                   setIsEditing(false);
                 }
               }}>
-                Save
+               <span className="text-slate-200">Save</span>
               </Button>
             </>
           )}
