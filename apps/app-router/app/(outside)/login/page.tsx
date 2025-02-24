@@ -1,15 +1,40 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion"
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
 import { cn } from "../../../lib/utils";
+import axios from "axios";
+import Link from "next/link";
+import apiClient from "@/services/apiClient";
 
 export default function SignupFormDemo() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
+    setError(null);
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const { data } = await apiClient.post("/auth/login", { email, password });
+      localStorage.setItem("access_token", data.access_token);
+      router.push("/onboarding");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Invalid credentials!");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  
   return (
     <div className="w-full h-screen bg-[#0f0e0d] bg-dot-white/[0.4] relative text-slate-300 flex items-center justify-center">
               <div className="absolute inset-0 overflow-hidden ">
@@ -62,9 +87,8 @@ export default function SignupFormDemo() {
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         LogIn
       </h2>
-
-      <form className="my-8" onSubmit={handleSubmit}>
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+      <form className="my-8" onSubmit={handleLogin}>
+        {/* <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
             <Label htmlFor="firstname">First name</Label>
             <Input id="firstname" placeholder="Tyler" type="text" />
@@ -73,23 +97,30 @@ export default function SignupFormDemo() {
             <Label htmlFor="lastname">Last name</Label>
             <Input id="lastname" placeholder="Durden" type="text" />
           </LabelInputContainer>
-        </div>
+        </div> */}
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+          <Input id="email" name="email" placeholder="projectmayhem@fc.com" type="email" required />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" name="password" placeholder="••••••••" type="password" required />
         </LabelInputContainer>
 
         <button
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          className="bg-gradient-to-br mt-10 relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
+          disabled={loading}
         >
-          Sign up &rarr;
+          {loading ? "Logging in..." : "Sign In →"}
           <BottomGradient />
         </button>
+
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
+        <p className="text-center mt-6 text-sm">
+        Don't have an account? <Link href="/signup" className="text-blue-500">Sign up</Link>
+      </p>
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
       </form>
@@ -106,6 +137,9 @@ const BottomGradient = () => {
     </>
   );
 };
+
+
+
 
 const LabelInputContainer = ({
   children,

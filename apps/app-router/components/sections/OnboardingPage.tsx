@@ -38,6 +38,8 @@ const formSchema = z.object({
   state: z.string().min(2, "Please enter a valid state"),
   zipCode: z.string().min(5, "Please enter a valid ZIP code"),
   country: z.string().min(2, "Please enter a valid country"),
+  companyPhone: z.string().min(10, "Please enter a valid phone number"),
+  companyEmail: z.string().email("Please enter a valid email address"),
   taxId: z.string().min(9, "Please enter a valid tax ID"),
   vatNumber: z.string().optional(),
 });
@@ -74,6 +76,16 @@ export default function OnboardingPage() {
       //   throw new Error("You must be logged in to complete the onboarding.");
       // }
 
+      console.log("email", formData.companyName);
+      console.log("email", formData.businessType);
+      console.log("email", formData.logo);
+      console.log("email", formData.streetAddress);
+      console.log("email", formData.city);
+      console.log("email", formData.state);
+      console.log("email", formData.zipCode);
+      console.log("email", formData.country);
+      console.log("email", formData.taxId);
+      console.log("email", formData.vatNumber);
 
       const { data } = await apiClient.post("/onboarding", {
         companyName: formData.companyName,
@@ -84,6 +96,8 @@ export default function OnboardingPage() {
         state: formData.state,
         zipCode: formData.zipCode,
         country: formData.country,
+        companyPhone: formData.companyPhone,
+        companyEmail: formData.companyEmail,
         taxId: formData.taxId,
         vatNumber: formData.vatNumber || null,
       });
@@ -110,6 +124,8 @@ export default function OnboardingPage() {
       state: "",
       zipCode: "",
       country: "",
+      companyPhone: "",
+      companyEmail: "",
       taxId: "",
       vatNumber: "",
     },
@@ -325,6 +341,44 @@ export default function OnboardingPage() {
                         </FormItem>
                       )}
                     />
+
+<div className="grid grid-cols-2 mt-10 gap-10">
+                      <FormField
+                        control={form.control}
+                        name="companyPhone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Phone Number</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Enter your company phone number"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="companyEmail"
+                        render={({ field }) => (
+                          <FormItem>
+                             <FormLabel>Company Email</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Enter your company email"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    
                   </CardContent>
                   <CardFooter className="flex justify-between pt-6 border-t">
                     <Button

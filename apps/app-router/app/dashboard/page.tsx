@@ -15,6 +15,7 @@ import {
   FileText,
 } from "lucide-react";
 import { mockInvoices } from "./data/mockData";
+import Navbar from "@/components/Navbar";
 
 const mockStats = [
   {
@@ -65,12 +66,18 @@ const mockRecentInvoices = [
 ];
 
 export default function DashboardPage() {
-  return <DashboardContent />;
+  return(
+    <div>
+        <Navbar />
+       <DashboardContent />
+    </div>
+  )
 }
 
 function DashboardContent() {
   return (
-    <div className="space-y-8 ">
+    <div>
+      <div className="space-y-8 ">
       <div className="grid gap-4 md:grid-cols-3">
         {mockStats.map((stat) => (
           <Card key={stat.name} className="border border-gray-400">
@@ -133,6 +140,7 @@ function DashboardContent() {
           </div>
         </CardContent>
       </Card>
+    </div>
     </div>
   );
 }

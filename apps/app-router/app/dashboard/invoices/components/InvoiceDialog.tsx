@@ -89,7 +89,7 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
         quantity: newItems[index]?.quantity || 0,
         unitPrice: newItems[index]?.unitPrice || 0,
         tax: newItems[index]?.tax || 0,
-        subtotal: newItems[index] && (field === 'quantity' || field === 'unitPrice') ? 
+        subtotal: newItems[index] && (field === 'quantity' || field === 'unitPrice') ?
           (newItems[index].quantity || 0) * (field === 'unitPrice' ? value : (newItems[index].unitPrice || 0)) :
           newItems[index]?.subtotal || 0,
         lineTotal: field === 'quantity' || field === 'unitPrice' || field === 'tax' ?
@@ -113,6 +113,11 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
             </DialogTitle>
             {invoice?.id && (
               <div className="flex items-center gap-4">
+                {!isEditing && (
+                  <Button onClick={() => setIsEditing(true)}>
+                    <span className="text-slate-200">Edit</span>
+                  </Button>
+                )}
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button variant="ghost" size="icon" className="text-red-500 mr-8 hover:text-red-700">
@@ -196,7 +201,7 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
               <div className="space-y-2">
                 <Label>Issue Date</Label>
                 <Input
-                 className="text-slate-200"
+                  className="text-slate-200"
                   type="date"
                   value={editedInvoice?.dateIssued}
                   onChange={(e) => handleInputChange('dateIssued', e.target.value)}
@@ -255,7 +260,7 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
                   Add Item
                 </Button>
               </div>
-              
+
               <div className="space-y-4">
                 {editedInvoice?.items?.map((item, index) => (
                   <div key={item.id} className="grid grid-cols-12 gap-4 items-start">
@@ -395,11 +400,6 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
         </Tabs>
 
         <div className="flex justify-end gap-2 mt-4">
-          {!isEditing && (
-            <Button onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
-          )}
           {isEditing && (
             <>
               <Button onClick={() => {
@@ -408,13 +408,13 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
               }}>
                 <span className="text-slate-200">Cancel</span>
               </Button>
-              <Button variant="outline"  onClick={() => {
+              <Button variant="outline" onClick={() => {
                 if (editedInvoice) {
                   onSave(editedInvoice);
                   setIsEditing(false);
                 }
               }}>
-               <span className="text-slate-200">Save</span>
+                <span className="text-slate-200">Save</span>
               </Button>
             </>
           )}

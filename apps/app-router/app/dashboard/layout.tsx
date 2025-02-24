@@ -129,7 +129,7 @@ export default function DashboardLayout({
 
         {/* Main content */}
         <div className="lg:pl-64">
-          <main className="py-8 px-4 sm:px-6 lg:px-8">{children}</main>
+          <main className="py-2 px-4 sm:px-6 lg:px-8">{children}</main>
         </div>
       </div>
     </>
@@ -140,7 +140,7 @@ function SidebarContent({ pathname }: { pathname: string }) {
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="space-y-8">
-        <div className="flex mt-2 border-b border-gray-400 items-center space-x-2">
+        <div className="flex mt-2 border-b mb-24 border-gray-400 items-center space-x-2">
           <Logo />
         </div>
 
