@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 export default function CTA() {
     return (
         <div className="h-[38rem] w-full bg-slate-300 bg-dot-black/[0.4] relative text-slate-300 flex items-center justify-center">
-            <div className="max-w-6xl bg-[#0f0e0d] rounded-2xl mx-auto text-center py-16 px-20 sm:py-20 sm:px-10 lg:px-36">
+            <div className=" bg-[#0f0e0d] rounded-2xl mx-auto text-center py-16 px-20 sm:py-20 sm:px-10 lg:px-48">
                 <motion.h2
                     className="text-3xl font-extrabold t text-slate-100 sm:text-4xl"
                     initial={{ opacity: 0, y: 20 }}

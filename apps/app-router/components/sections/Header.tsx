@@ -1,8 +1,10 @@
 'use client'
 import Link from "next/link"
 import {Button} from "@/components/ui/Button"
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
   return (
     <header className="bg-[#030303] ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,10 +36,10 @@ export default function Header() {
           </nav>
           <div className="flex items-center space-x-4">
             {/* <ThemeToggle /> */}
-            <Button variant="outline" className="hidden sm:inline-flex">
+            <Button variant="outline" className="hidden sm:inline-flex" onClick={() => router.push("/login")}>
               Log in
             </Button>
-            <Button className="hover:border text-[#8f9eb2]  hover:border-teal-500">Sign up</Button>
+            <Button className="hover:border text-[#8f9eb2]  hover:border-teal-500" onClick={() => router.push("/signup")}>Sign up</Button>
           </div>
         </div>
       </div>

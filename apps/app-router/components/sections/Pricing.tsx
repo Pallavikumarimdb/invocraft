@@ -6,35 +6,48 @@ import { motion } from "framer-motion"
 const plans = [
   {
     name: "Starter",
-    price: "$29",
-    features: ["5 team members", "Basic analytics", "24/7 support", "10GB storage"],
+    price: "$19/month",
+    features: [
+      "Up to 3 clients",
+      "Basic invoicing",
+      "Standard customer tracking",
+      "5GB secure cloud storage",
+      "Email support",
+    ],
   },
   {
     name: "Professional",
-    price: "$99",
+    price: "$99/month",
     features: [
-      "Unlimited team members",
-      "Advanced analytics",
-      "Priority support",
-      "100GB storage",
-      "Custom integrations",
+      "Unlimited clients",
+      "Custom branding on invoices",
+      "Advanced automation (reminders, late fees, etc.)",
+      "100GB secure cloud storage",
+      "Phone & live chat support",
+      "Comprehensive analytics & insights",
+      "Third-party integrations (CRM, Accounting software, etc.)",
     ],
   },
   {
     name: "Enterprise",
     price: "Custom",
     features: [
-      "Unlimited everything",
-      "Dedicated account manager",
-      "Custom feature development",
+      "Enterprise-grade security & compliance",
+      "Unlimited clients & team members",
+      "AI-powered financial insights",
       "On-premise deployment option",
+      "Custom feature development",
+      "Dedicated account manager",
+      "24/7 priority support",
+      "API access & advanced integrations",
     ],
   },
-]
+];
+
 
 export default function Pricing() {
     return (
-        <div className="w-full bg-slate-300 bg-dot-black/[0.4] relative flex items-center justify-center">
+        <div className="w-full bg-slate-300 px-[10%] bg-dot-black/[0.4] relative flex items-center justify-center">
           <div className="text-gray-900 py-16 sm:py-24 relative overflow-hidden" id="pricing">
             <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <motion.div

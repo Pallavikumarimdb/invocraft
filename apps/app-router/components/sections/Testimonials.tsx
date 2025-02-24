@@ -5,7 +5,17 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 export function Testimonials() {
   return (
-    <ul className="px-[10%] bg-[#030303] py-24 pb-36 grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[60rem] xl:grid-rows-2">
+   <div className="bg-[#030303]">
+     <div className="px-8 pt-20">
+        <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black dark:text-white">
+        Feature-Rich, Powerful & Easy-to-Use
+        </h4>
+
+        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-500 text-center font-normal dark:text-neutral-300">
+        Managing invoices shouldn’t be a hassle. With InvoCraft, freelancers can send professional invoices, track payments, and manage clients—all in one place.
+        </p>
+      </div>
+     <ul className="px-[10%] py-16 pb-36 grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[60rem] xl:grid-rows-2">
       <GridItem
         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
         icon={<Box className="h-4 w-4 text-black dark:text-neutral-400" />}
@@ -41,6 +51,7 @@ export function Testimonials() {
         description="Access your invoices and client data on the go with cloud-based security and seamless mobile-friendly access."
       />
     </ul>
+   </div>
   );
 }
 

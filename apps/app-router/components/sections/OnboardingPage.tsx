@@ -57,6 +57,7 @@ const steps = [
 export default function OnboardingPage() {
   const [step, setStep] = useState(0);
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
   const [logoPreview, setLogoPreview] = useState("");
 
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -76,16 +77,6 @@ export default function OnboardingPage() {
       //   throw new Error("You must be logged in to complete the onboarding.");
       // }
 
-      console.log("email", formData.companyName);
-      console.log("email", formData.businessType);
-      console.log("email", formData.logo);
-      console.log("email", formData.streetAddress);
-      console.log("email", formData.city);
-      console.log("email", formData.state);
-      console.log("email", formData.zipCode);
-      console.log("email", formData.country);
-      console.log("email", formData.taxId);
-      console.log("email", formData.vatNumber);
 
       const { data } = await apiClient.post("/onboarding", {
         companyName: formData.companyName,
@@ -105,6 +96,11 @@ export default function OnboardingPage() {
       router.push(" /dashboard");
     } catch (error) {
       console.error("Error during onboarding:", error);
+      if (error instanceof Error) {
+        setError((error as any).response?.data?.message || "Something Went wrong!");
+      } else {
+        setError("Something Went wrong!");
+      }
       // toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
@@ -167,7 +163,7 @@ export default function OnboardingPage() {
     <div className="min-h-screen bg-slate-300 bg-dot-black/[0.5] relative">
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Progress Steps */}
-        
+
         <div className="max-w-4xl mx-auto mb-12">
           <div className="flex justify-between items-center relative">
             {steps.map((s, i) => (
@@ -342,13 +338,13 @@ export default function OnboardingPage() {
                       )}
                     />
 
-<div className="grid grid-cols-2 mt-10 gap-10">
+                    <div className="grid grid-cols-2 mt-10 gap-10">
                       <FormField
                         control={form.control}
                         name="companyPhone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Phone Number</FormLabel>
+                            <FormLabel className="text-slate-300">Phone Number</FormLabel>
                             <FormControl>
                               <Input
                                 placeholder="Enter your company phone number"
@@ -365,7 +361,7 @@ export default function OnboardingPage() {
                         name="companyEmail"
                         render={({ field }) => (
                           <FormItem>
-                             <FormLabel>Company Email</FormLabel>
+                            <FormLabel className="text-slate-300">Company Email</FormLabel>
                             <FormControl>
                               <Input
                                 placeholder="Enter your company email"
@@ -378,7 +374,7 @@ export default function OnboardingPage() {
                       />
                     </div>
 
-                    
+
                   </CardContent>
                   <CardFooter className="flex justify-between pt-6 border-t">
                     <Button
@@ -776,12 +772,13 @@ export default function OnboardingPage() {
                       <ArrowLeft className="w-4 h-4 mr-2" />
                       Back
                     </Button>
+                    {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                     <Button
                       type="button"
                       onClick={handleGoToDashboard}
                       className="bg-blue-600 hover:bg-blue-700 text-white"
                     >
-                      Go to Dashboard
+                      {isLoading ? "Logging in..." : "Go to Dashboard →"}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </CardFooter>

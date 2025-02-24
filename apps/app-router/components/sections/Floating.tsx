@@ -1,75 +1,57 @@
 import React from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
-  IconBrandGithub,
-  IconBrandX,
-  IconExchange,
   IconHome,
-  IconNewSection,
-  IconTerminal2,
 } from "@tabler/icons-react";
-import Image from "next/image";
-import { ReceiptText } from "lucide-react";
+import { Building2, LayoutDashboard, PersonStanding, Receipt, ReceiptText, Settings, SmilePlus } from "lucide-react";
 
-export function Floating() {
+export function Floating({ setImageSrc }: { setImageSrc: (src: string) => void }) {
   const links = [
     {
+      title: "Home",
+      icon: <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      image: "/home1.png",
+    },
+    {
       title: "Dashboard",
-      icon: (
-        <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-
-    {
-      title: "Customers",
-      icon: (
-        <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
+      icon: <LayoutDashboard  className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      image: "/dashboard.png",
     },
     {
-      title: "Invoices",
-      icon: (
-        <IconNewSection className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
+      title: "Customer",
+      icon: <PersonStanding className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      image: "/customer.png",
     },
     {
       title: "Company",
-      icon: (
-        <ReceiptText className="h-full w-full text-neutral-500 dark:text-neutral-300"/>
-      ),
-      href: "#",
+      icon: <Building2  className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      image: "/company.png",
     },
     {
-      title: "Settings",
-      icon: (
-        <IconExchange className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-
-    {
-      title: "Pricing",
-      icon: (
-        <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
+      title: "Invoices",
+      icon: <Receipt className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      image: "/invoices.png",
     },
     {
-      title: "Profile",
-      icon: (
-        <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
+      title: "Setting",
+      icon: <Settings  className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      image: "/setting.png",
+    },
+    {
+      title: "Addcustomer",
+      icon: <SmilePlus className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      image: "/addcustomer.png",
     },
   ];
+
   return (
     <div className="flex items-center justify-center w-full">
       <FloatingDock
-        mobileClassName="translate-y-20" // only for demo, remove for production
-        items={links}
+        mobileClassName="translate-y-20"
+        items={links.map((link) => ({
+          ...link,
+          onClick: () => setImageSrc(link.image), // Change Image on Click
+        }))}
       />
     </div>
   );
