@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -13,10 +13,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Building2, MapPin, Receipt, Upload, Edit2 } from "lucide-react";
 import Image from "next/image";
+import useCompany from "@/hooks/useCompany";
 import { LogoEditDialog } from "./LogoEditDialog";
+import apiClient from "@/services/apiClient";
 
 interface CompanyFormData {
-  name: string;
+  companyName: string;
+  companyPhone: string;
+  companyEmail: string;
   logo: string | null;
   businessType: string;
   streetAddress: string;
@@ -29,20 +33,44 @@ interface CompanyFormData {
 }
 
 export function CompanyContent() {
+  const { company, setCompany } = useCompany();
   const [formData, setFormData] = useState<CompanyFormData>({
-    name: "Acme Corporation",
-    logo: null,
-    businessType: "Corporation",
-    streetAddress: "123 Business Ave",
-    city: "Metropolis",
-    state: "NY",
-    zipCode: "10001",
-    country: "United States",
-    taxId: "12-3456789",
-    vatNumber: "VAT123456",
+    companyName: company?.companyName || "",
+    companyPhone: company?.companyPhone || "",
+    companyEmail: company?.companyEmail || "",
+    logo: company?.logo || null,
+    businessType: company?.businessType || "",
+    streetAddress: company?.streetAddress || "",
+    city: company?.city || "",
+    state: company?.state || "",
+    zipCode: company?.zipCode || "",
+    country: company?.country || "",
+    taxId: company?.taxId || "",
+    vatNumber: company?.vatNumber || "",
   });
-  const [previewLogo, setPreviewLogo] = useState<string | null>(null);
+
+  const [previewLogo, setPreviewLogo] = useState<string | null>(formData.logo);
   const [isLogoDialogOpen, setIsLogoDialogOpen] = useState(false);
+
+  useEffect(() => {
+    if (company) {
+      setFormData({
+        companyName: company.companyName || "",
+        companyPhone: company?.companyPhone || "",
+        companyEmail: company?.companyEmail || "",
+        logo: company.logo || null,
+        businessType: company.businessType || "",
+        streetAddress: company.streetAddress || "",
+        city: company.city || "",
+        state: company.state || "",
+        zipCode: company.zipCode || "",
+        country: company.country || "",
+        taxId: company.taxId || "",
+        vatNumber: company.vatNumber || "",
+      });
+      setPreviewLogo(company.logo || null);
+    }
+  }, [company]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -59,21 +87,27 @@ export function CompanyContent() {
       reader.onloadend = () => {
         const base64String = reader.result as string;
         setPreviewLogo(base64String);
-        setFormData(prev => ({ ...prev, logo: base64String }));
+        setFormData((prev) => ({ ...prev, logo: base64String }));
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleLogoUpdate = (newLogo: string) => {
-    setFormData(prev => ({ ...prev, logo: newLogo }));
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (company) {
+        console.log("Company updated successfully:", formData);
+        const response = await apiClient.put(`/onboarding/${company._id}`, formData);
+        setCompany(response.data); // Update company state with the new data
+        console.log("Company updated successfully:", response.data);
+      }
+    } catch (error) {
+      console.error("Error updating company data:", error);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-  };
+
 
   return (
     <div className="container max-w-3xl mx-auto py-6">
@@ -139,7 +173,7 @@ export function CompanyContent() {
                   <Input
                     id="name"
                     name="name"
-                    value={formData.name}
+                    value={formData.companyName}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -249,7 +283,11 @@ export function CompanyContent() {
         isOpen={isLogoDialogOpen}
         onClose={() => setIsLogoDialogOpen(false)}
         currentLogo={formData.logo}
-        onSave={handleLogoUpdate}
+        onSave={(newLogo) => {
+          // This will update the formData with the new logo
+          setFormData((prev) => ({ ...prev, logo: newLogo }));
+          setPreviewLogo(newLogo);
+        }}
       />
     </div>
   );

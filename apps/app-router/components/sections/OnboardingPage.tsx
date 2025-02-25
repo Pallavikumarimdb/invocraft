@@ -344,7 +344,7 @@ export default function OnboardingPage() {
                         name="companyPhone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-slate-300">Phone Number</FormLabel>
+                            <FormLabel className="text-slate-900 dark:text-slate-900">Phone Number</FormLabel>
                             <FormControl>
                               <Input
                                 placeholder="Enter your company phone number"
@@ -361,7 +361,7 @@ export default function OnboardingPage() {
                         name="companyEmail"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-slate-300">Company Email</FormLabel>
+                            <FormLabel className="text-slate-900 dark:text-slate-900">Company Email</FormLabel>
                             <FormControl>
                               <Input
                                 placeholder="Enter your company email"

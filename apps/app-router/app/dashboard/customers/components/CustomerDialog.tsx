@@ -1,20 +1,13 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Edit2, Save, X, Trash2 } from "lucide-react";
+import { Save, X, Trash2 } from "lucide-react";
 import { Customer } from "../../types/customer";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Switch } from "@/components/ui/switch";
@@ -28,7 +21,6 @@ interface CustomerDialogProps {
 }
 
 export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: CustomerDialogProps) {
-  const [isEditing, setIsEditing] = useState(false);
   const [editedCustomer, setEditedCustomer] = useState<Customer | null>(customer);
 
   useEffect(() => {
@@ -44,7 +36,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
   const handleSave = () => {
     if (editedCustomer) {
       onSave(editedCustomer);
-      setIsEditing(false);
     }
   };
 
@@ -61,29 +52,28 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
 
   return (
     <Dialog open={isOpen} onOpenChange={() => onClose()}>
-      <DialogContent className="sm:max-w-[550px]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <div className="flex justify-between items-center">
             <DialogTitle>
               {customer?.name ? `${customer.name}` : 'Add New Customer'}
             </DialogTitle>
-            {customer?.id && (
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Switch
-                    checked={editedCustomer?.status === 'active'}
-                    onCheckedChange={handleStatusToggle}
-                    disabled={!isEditing}
-                  />
-                  <span className={`text-sm ${editedCustomer?.status === 'active' ? 'text-green-500' : 'text-gray-500'}`}>
-                    {editedCustomer?.status === 'active' ? 'Active' : 'Inactive'}
-                  </span>
-                </div>
+            <div className="flex items-center gap-4">
+              <div className="mr-6 flex items-center gap-2">
+                <Switch
+                  checked={editedCustomer?.status === 'active'}
+                  onCheckedChange={handleStatusToggle}
+                />
+                <span className={`text-sm ${editedCustomer?.status === 'active' ? 'text-green-500' : 'text-gray-500'}`}>
+                  {editedCustomer?.status === 'active' ? 'Active' : 'Inactive'}
+                </span>
+              </div>
+              {customer?.name && (
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <button className="text-red-500 mr-10 hover:text-red-700">
+                    <Button variant="ghost" size="icon" className="text-red-500 mr-8 hover:text-red-700">
                       <Trash2 className="h-4 w-4" />
-                    </button>
+                    </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
@@ -95,10 +85,10 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
                       <AlertDialogAction
-                        className="bg-red-500 text-red-500  hover:bg-red-700"
+                        className="bg-red-500 hover:bg-red-700"
                         onClick={() => {
-                          if (customer?.id && onDelete) {
-                            onDelete(customer.id);
+                          if (customer._id && onDelete) {
+                            onDelete(customer._id);
                             onClose();
                           }
                         }}
@@ -108,25 +98,13 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <DialogDescription>
             {customer?.name ? 'View and edit customer details' : 'Enter new customer details'}
           </DialogDescription>
-          <div className="flex gap-2 pt-4 text-slate-300">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsEditing(!isEditing)}
-            >
-              {isEditing ? (
-                <X className="text-slate-400 h-4 w-4 mr-2" />
-              ) : (
-                <Edit2 className="h-4 w-4 mr-2" />
-              )}
-              <span className="text-slate-300">{isEditing ? 'Cancel' : 'Edit'}</span>
-            </Button>
+          <div className="flex gap-2">
           </div>
         </DialogHeader>
 
@@ -143,7 +121,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 <Input
                   value={editedCustomer?.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  disabled={!isEditing}
                 />
               </div>
               <div className="space-y-2">
@@ -151,7 +128,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 <Input
                   value={editedCustomer?.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  disabled={!isEditing}
                 />
               </div>
               <div className="space-y-2">
@@ -159,7 +135,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 <Input
                   value={editedCustomer?.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
-                  disabled={!isEditing}
                 />
               </div>
               <div className="space-y-2">
@@ -167,7 +142,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 <Input
                   value={editedCustomer?.status}
                   onChange={(e) => handleInputChange('status', e.target.value)}
-                  disabled={!isEditing}
                 />
               </div>
               <div className="col-span-2 space-y-2">
@@ -175,7 +149,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 <Textarea
                   value={editedCustomer?.address}
                   onChange={(e) => handleInputChange('address', e.target.value)}
-                  disabled={!isEditing}
                 />
               </div>
             </div>
@@ -188,7 +161,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 <Input
                   value={editedCustomer?.vatNumber}
                   onChange={(e) => handleInputChange('vatNumber', e.target.value)}
-                  disabled={!isEditing}
                 />
               </div>
               <div className="space-y-2">
@@ -196,40 +168,19 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                 <Input
                   value={editedCustomer?.registrationNumber}
                   onChange={(e) => handleInputChange('registrationNumber', e.target.value)}
-                  disabled={!isEditing}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Total Invoices</Label>
-                <Input
-                  value={editedCustomer?.totalInvoices}
-                  type="number"
-                  onChange={(e) => handleInputChange('totalInvoices', parseInt(e.target.value))}
-                  disabled={!isEditing}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Total Paid</Label>
-                <Input
-                  value={editedCustomer?.totalPaid}
-                  type="number"
-                  onChange={(e) => handleInputChange('totalPaid', parseInt(e.target.value))}
-                  disabled={!isEditing}
                 />
               </div>
             </div>
           </TabsContent>
         </Tabs>
 
-        {isEditing && (
           <DialogFooter>
             <Button onClick={handleSave}>
-              <Save className="h-4 w-4 mr-2" />
-              <span className="text-slate-200">Save Changes</span>
+              <Save className="h-4 w-4 mr-2 text-slate-300 dark:text-slate-300" />
+              <span className="text-slate-300 dark:text-slate-300">Save Changes</span>
             </Button>
           </DialogFooter>
-        )}
       </DialogContent>
     </Dialog>
   );
-} 
+}

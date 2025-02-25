@@ -189,10 +189,10 @@ export function ProductManagement() {
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-semibold">{product.name}</h3>
-                                <p className="text-gray-600 mt-1">{product.description}</p>
+                                <p className="text-gray-500 mt-1">{product.description}</p>
                                 <div className="mt-2 space-y-1">
-                                    <p className="text-sm text-gray-900">Rate: ${product.hourlyRate}/hour</p>
-                                    <p className="text-sm text-gray-900">Minimum time: {product.minimumTime}</p>
+                                    <p className="text-sm text-gray-400">Rate: ${product.hourlyRate}/hour</p>
+                                    <p className="text-sm text-gray-400">Minimum time: {product.minimumTime}</p>
                                 </div>
                             </div>
                             <div className="flex space-x-3">

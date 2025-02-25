@@ -3,7 +3,6 @@ import { Invoice } from "../types/invoice";
 
 export const mockCustomers: Customer[] = [
     {
-      id: "1",
       name: "John Doe Enterprises",
       email: "john@doeenterprises.com",
       phone: "+1 (555) 123-4567",
@@ -15,7 +14,6 @@ export const mockCustomers: Customer[] = [
       status: "active",
     },
     {
-      id: "2",
       name: "Sarah Smith Co",
       email: "sarah@smithco.com",
       phone: "+1 (555) 987-6543",
@@ -27,7 +25,6 @@ export const mockCustomers: Customer[] = [
       status: "active",
     },
     {
-      id: "3",
       name: "Tech Solutions Inc",
       email: "contact@techsolutions.com",
       phone: "+1 (555) 456-7890",

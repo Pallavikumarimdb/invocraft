@@ -1,6 +1,5 @@
 import { Invoice } from "../../types/invoice";
-import { DollarSign } from "lucide-react";
-import Image from "next/image";
+
 
 interface InvoiceTemplateProps {
   invoice: Invoice;
@@ -8,7 +7,7 @@ interface InvoiceTemplateProps {
 
 export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
   const calculateSubtotal = () => {
-    return invoice.items?.reduce((acc, item) => 
+    return invoice.items?.reduce((acc, item) =>
       acc + (item.quantity * item.unitPrice), 0
     ) || 0;
   };
@@ -27,33 +26,38 @@ export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
   };
 
   return (
-    <div className="bg-slate-300 rounded-2xl p-8 shadow-lg max-w-4xl mx-auto">
+    <div className="bg-gray-300 rounded-lg p-8 shadow-lg max-w-4xl mx-auto">
       {/* Header */}
       <div className="flex justify-between items-start mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">INVOICE</h1>
-          <p className="text-gray-600">Invoice Number: {invoice.invoiceNumber}</p>
+          <h1 className="text-3xl font-bold text-gray-900">INVOICE</h1>
+          <p className="text-gray-700">Invoice Number: {invoice.invoiceNumber}</p>
         </div>
-        <div className="text-right">
+        {/* <div className="text-right">
           <div className="w-32 h-12 bg-gray-200 flex items-center justify-center">
             <p className="text-center">Company Logo</p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Dates */}
       <div className="flex justify-between mb-8">
         <div>
-          <p className="text-gray-600">Date Issued: {invoice.dateIssued}</p>
-          <p className="text-gray-600">Due Date: {invoice.dueDate}</p>
+          <p className="text-gray-700">
+            Date Issued: {new Date(invoice.dateIssued).toISOString().split('T')[0]}
+          </p>
+          <p className="text-gray-700">
+            Due Date: {new Date(invoice.dueDate).toISOString().split('T')[0]}
+          </p>
         </div>
+
       </div>
 
       {/* Company and Client Information */}
       <div className="grid grid-cols-2 gap-8 mb-8">
         <div>
           <h2 className="text-lg font-semibold mb-2">From:</h2>
-          <div className="text-gray-600">
+          <div className="text-gray-700">
             <p className="font-bold">{invoice.companyName}</p>
             <p>{invoice.companyAddress}</p>
             <p>Phone: {invoice.companyPhone}</p>
@@ -63,7 +67,7 @@ export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
         </div>
         <div>
           <h2 className="text-lg font-semibold mb-2">To:</h2>
-          <div className="text-gray-600">
+          <div className="text-gray-700">
             <p className="font-bold">{invoice.customerName}</p>
             <p>{invoice.customerAddress}</p>
             <p>Phone: {invoice.customerPhone}</p>
@@ -77,7 +81,7 @@ export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
       <div className="mb-8">
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-700">
               <th className="text-left p-2">Description</th>
               <th className="text-right p-2">Quantity</th>
               <th className="text-right p-2">Unit Price</th>
@@ -87,7 +91,7 @@ export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
           </thead>
           <tbody>
             {invoice.items?.map((item, index) => (
-              <tr key={index} className="border-b">
+              <tr key={index} className="border-b text-gray-700">
                 <td className="p-2">{item.description}</td>
                 <td className="text-right p-2">{item.quantity}</td>
                 <td className="text-right p-2">${item.unitPrice.toFixed(2)}</td>
@@ -103,7 +107,7 @@ export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
 
       {/* Totals */}
       <div className="flex justify-end mb-8">
-        <div className="w-64">
+        <div className="w-64 text-gray-700">
           <div className="flex justify-between mb-2">
             <span>Subtotal:</span>
             <span>${calculateSubtotal().toFixed(2)}</span>
