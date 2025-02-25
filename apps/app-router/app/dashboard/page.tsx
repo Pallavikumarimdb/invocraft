@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { mockInvoices } from "./data/mockData";
 import Navbar from "@/components/Navbar";
+import { useEffect, useState } from "react";
 
 const mockStats = [
   {
@@ -66,6 +67,32 @@ const mockRecentInvoices = [
 ];
 
 export default function DashboardPage() {
+   const [mounted, setMounted] = useState(false);
+  
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+  
+    if (!mounted) {
+        return (
+          <div className="min-h-screen w-full bg-[#030303] p-4">
+          <div className="flex animate-pulse space-x-4">
+            <div className="size-10 rounded-full bg-[#130303]"></div>
+            <div className="flex-1 space-y-6 py-1">
+              <div className="h-2 rounded bg-[#130303]"></div>
+              <div className="space-y-3">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="col-span-2 h-2 rounded bg-[#130303]"></div>
+                  <div className="col-span-1 h-2 rounded bg-[#130303]"></div>
+                </div>
+                <div className="h-2 rounded bg-[#130303]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        );
+    }
+  
   return(
     <div>
         <Navbar />
@@ -77,10 +104,11 @@ export default function DashboardPage() {
 function DashboardContent() {
   return (
     <div>
-      <div className="space-y-8 ">
+    <div className="space-y-8">
+      {/* Stats Section */}
       <div className="grid gap-4 md:grid-cols-3">
-        {mockStats.map((stat) => (
-          <Card key={stat.name} className="border border-gray-400">
+        {mockStats.map((stat, index) => (
+          <Card key={`${stat.name}-${index}`} className="border border-gray-400">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-gray-500">
                 {stat.name}
@@ -102,7 +130,8 @@ function DashboardContent() {
           </Card>
         ))}
       </div>
-
+  
+      {/* Recent Invoices Section */}
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Recent Invoices</CardTitle>
@@ -112,14 +141,16 @@ function DashboardContent() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {mockInvoices.map((invoice) => (
+            {mockInvoices.map((invoice, index) => (
               <div
-                key={invoice.id}
+                key={`${invoice.id}-${index}`} // Ensure uniqueness
                 className="flex items-center justify-between border-b border-gray-400 pb-4 last:border-0 last:pb-0"
               >
                 <div>
                   <div className="font-medium">{invoice.customerName}</div>
-                  <div className="text-sm text-gray-500">{invoice.invoiceNumber}</div>
+                  <div className="text-sm text-gray-500">
+                    {invoice.invoiceNumber}
+                  </div>
                 </div>
                 <div className="text-right">
                   <div className="font-medium">{invoice.amount}</div>
@@ -132,7 +163,8 @@ function DashboardContent() {
                         : "text-red-600"
                     }`}
                   >
-                    {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                    {invoice.status.charAt(0).toUpperCase() +
+                      invoice.status.slice(1)}
                   </div>
                 </div>
               </div>
@@ -141,6 +173,6 @@ function DashboardContent() {
         </CardContent>
       </Card>
     </div>
-    </div>
+  </div>  
   );
 }

@@ -71,7 +71,7 @@ export default function DashboardLayout({
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <CheckCircle className="h-6 w-6 text-slate-300" />
-                    <p className="ml-4 text-lg text-slate-400 font-medium">
+                    <p  className="ml-4 text-lg text-slate-400 font-medium">
                       {feature}
                     </p>
                   </div>

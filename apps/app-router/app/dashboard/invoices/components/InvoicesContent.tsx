@@ -144,8 +144,8 @@ export function InvoicesContent({ searchQuery, setSearchQuery }: InvoicesContent
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Customers</SelectItem>
-                {mockCustomers.map((customer) => (
-                  <SelectItem key={customer.id} value={customer.name}>
+                {mockCustomers.map((customer, index) => (
+                  <SelectItem key={`${customer.id}-${index}`} value={customer.name}>
                     {customer.name}
                   </SelectItem>
                 ))}
@@ -156,8 +156,8 @@ export function InvoicesContent({ searchQuery, setSearchQuery }: InvoicesContent
       </div>
 
       <div className="grid gap-4">
-        {filteredInvoices.map((invoice) => (
-          <Card key={invoice.id} className="shadow-xl transition-shadow ">
+        {filteredInvoices.map((invoice, index) => (
+          <Card key={`${invoice.id}-${index}`} className="shadow-xl transition-shadow ">
             <CardContent className="p-6">
               <div className="flex justify-between items-center">
                 <div className="space-y-1">

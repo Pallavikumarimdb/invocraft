@@ -12,7 +12,7 @@ export default function CTA() {
                     transition={{ duration: 0.5 }}
                     viewport={{ once: true }}
                 >
-                    <span className="block">Ready to streamline your workflow?</span>
+                    <span className="block">Ready to transform your business?</span>
                     <span className="block mt-2">Start your free trial today.</span>
                 </motion.h2>
                 <motion.p
@@ -22,7 +22,7 @@ export default function CTA() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     viewport={{ once: true }}
                 >
-                    Join thousands of satisfied customers who have transformed their business with StreamLine.
+                    Join thousands of satisfied customers who have transformed their business with  InvoCraft.
                 </motion.p>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

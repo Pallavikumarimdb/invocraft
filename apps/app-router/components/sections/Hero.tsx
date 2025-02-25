@@ -5,6 +5,7 @@ import { Pacifico } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { AnimatedTooltip } from "../ui/animated-tooltip"
 
+
 const pacifico = Pacifico({
     subsets: ["latin"],
     weight: ["400"],
@@ -97,6 +98,7 @@ export default function Hero({
             },
         }),
     }
+
 
     return (
         <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">

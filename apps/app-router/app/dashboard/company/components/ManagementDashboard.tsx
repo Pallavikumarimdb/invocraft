@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Building2, Package, Settings } from "lucide-react";
+import { Building2, Package } from "lucide-react";
 import { CompanyContent } from "./CompanyContent";
 import { ProductManagement } from "./ProductManagement";
 
