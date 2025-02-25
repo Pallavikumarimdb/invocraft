@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import apiClient from "@/services/apiClient";
-import { Invoice } from '@/app/app/dashboard/types/invoice';
+import { Invoice } from '@/app/dashboard/types/invoice';
 
 const useInvoices = () => {
    const [invoices, setInvoices] = useState<Invoice[]>([]);
