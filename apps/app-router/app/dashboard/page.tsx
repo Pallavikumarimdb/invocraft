@@ -143,7 +143,7 @@ function DashboardContent() {
           <div className="space-y-4">
             {mockInvoices.map((invoice, index) => (
               <div
-                key={`${invoice.id}-${index}`} // Ensure uniqueness
+                key={`${invoice._id}-${index}`} // Ensure uniqueness
                 className="flex items-center justify-between border-b border-gray-400 pb-4 last:border-0 last:pb-0"
               >
                 <div>
