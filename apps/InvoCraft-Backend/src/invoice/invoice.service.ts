@@ -97,18 +97,23 @@ export class InvoiceService {
     }
   
     const doc = new PDFDocument();
+    const buffers: Buffer[] = [];
   
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader(
-      'Content-Disposition',
-      `attachment; filename=invoice_${invoiceData.invoiceNumber}.pdf`
-    );
+    doc.on('data', buffers.push.bind(buffers));
+    doc.on('end', () => {
+      const pdfBuffer = Buffer.concat(buffers);
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader(
+        'Content-Disposition',
+        `attachment; filename=invoice_${invoiceData.invoiceNumber}.pdf`
+      );
+      res.send(pdfBuffer);
+    });
   
     createInvoiceTemplate(doc, invoiceData);
-    doc.pipe(res);
     doc.end();
   }
-
+  
 
   async getInvoiceStatsByCustomer(customerId: string) {
     const result = await this.invoiceModel.aggregate([

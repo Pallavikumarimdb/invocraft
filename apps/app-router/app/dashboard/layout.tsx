@@ -95,23 +95,23 @@ export default function DashboardLayout({
 
       <div className="min-h-screen bg-[#0f0e0d] bg-dot-slate/[0.4] relative text-slate-300">
         <div className="lg:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="fixed top-4 left-4 z-50"
+          <button
+            // variant="ghost"
+            // size="icon"
+            className="inline-flex items-center justify-center  fixed top-4 z-50"
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
             {sidebarOpen ? (
-              <div className="bg-transparent flex ml-96"><X className=" h-6 w-6" /></div>
+              <div className="bg-transparent flex ml-56 mt-4"><X className="text-gray-400 h-6 w-6" /></div>
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-8 w-8 ml-4 mt-6 " />
             )}
-          </Button>
+          </button>
 
           {sidebarOpen && (
             <div className="fixed inset-0 z-40">
               <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setSidebarOpen(false)} />
-              <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white">
+              <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-[#0f0e0d]">
                 <div className="flex-1 overflow-y-auto px-4 py-4">
                   <SidebarContent pathname={pathname} />
                 </div>

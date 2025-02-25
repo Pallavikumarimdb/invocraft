@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model,Types  } from 'mongoose';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Customer, CustomerDocument } from './schemas/customer.schema';
+import mongoose from 'mongoose';
 
 @Injectable()
 export class CustomerService {
@@ -19,7 +20,7 @@ export class CustomerService {
   }
 
   async getCustomerById(id: string, userId: string): Promise<Customer> {
-    if (!Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid Customer ID');
     }
 
@@ -33,13 +34,17 @@ export class CustomerService {
 
 
   async deleteCustomer(id: string, userId: string): Promise<void> {
-    const objectId = new Types.ObjectId(id); 
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      throw new BadRequestException('Invalid customer ID');
+    }
+
+    const objectId = new Types.ObjectId(id);
     const result = await this.customerModel.deleteOne({ _id: objectId, userId });
+
     if (result.deletedCount === 0) {
       throw new NotFoundException(`Customer with id "${id}" not found`);
     }
   }
-  
 
   async updateCustomerById(id: string, updateCustomerDto: Partial<CreateCustomerDto>): Promise<Customer> {
     const updatedCustomer = await this.customerModel
