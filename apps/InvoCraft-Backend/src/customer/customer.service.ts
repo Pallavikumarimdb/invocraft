@@ -38,7 +38,8 @@ export class CustomerService {
       throw new BadRequestException('Invalid customer ID');
     }
 
-    const objectId = new mongoose.Types.ObjectId(id as string);
+    const objectId = mongoose.Types.ObjectId.createFromHexString(id as string);
+
     const result = await this.customerModel.deleteOne({ _id: objectId, userId });
 
     if (result.deletedCount === 0) {

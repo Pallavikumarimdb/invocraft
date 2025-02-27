@@ -4,7 +4,7 @@ import { Model, Types } from 'mongoose';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { Invoice, InvoiceDocument } from './schemas/invoice.schema';
 import PDFDocument from 'pdfkit';
-import * as Express from 'express';
+import { Response } from 'express';
 import { createInvoiceTemplate } from './invoice-template';
 @Injectable()
 export class InvoiceService {
@@ -90,7 +90,7 @@ export class InvoiceService {
   
 
 
-  async generateInvoicePdf(invoiceId: string, res: Express.Response) {
+  async generateInvoicePdf(invoiceId: string, res: Response) {
     const invoiceData = await this.invoiceModel.findById(invoiceId).exec();
     if (!invoiceData) {
       throw new NotFoundException(`Invoice with ID ${invoiceId} not found.`);
@@ -102,8 +102,8 @@ export class InvoiceService {
     doc.on('data', buffers.push.bind(buffers));
     doc.on('end', () => {
       const pdfBuffer = Buffer.concat(buffers);
-      res.header('Content-Type', 'application/pdf');
-      res.header(
+      (res as Response).setHeader('Content-Type', 'application/pdf');
+      (res as Response).setHeader(
         'Content-Disposition',
         `attachment; filename=invoice_${invoiceData.invoiceNumber}.pdf`
       );
