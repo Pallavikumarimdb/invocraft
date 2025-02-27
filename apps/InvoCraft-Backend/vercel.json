@@ -1,32 +1,25 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/main.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "src/main.ts",
-        "methods": [
-          "GET",
-          "POST",
-          "PUT",
-          "PATCH",
-          "OPTIONS",
-          "DELETE",
-          "HEAD",
-          "CONNECT",
-          "TRACE"
-        ]
-      }
-    ],
   "functions": {
-    "api/main.js": {
-      "runtime": "nodejs20.x",
-      "includeFiles": "dist/**"
+    "api/*": {
+      "runtime": "nodejs20.x"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts",
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "OPTIONS",
+        "DELETE",
+        "HEAD",
+        "CONNECT",
+        "TRACE"
+      ]
+    }
+  ]
 }
