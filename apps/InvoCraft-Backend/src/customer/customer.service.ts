@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException,BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model,Types  } from 'mongoose';
+import { Model  } from 'mongoose';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Customer, CustomerDocument } from './schemas/customer.schema';
 import mongoose from 'mongoose';
+import { ObjectId } from 'bson';
 
 @Injectable()
 export class CustomerService {
@@ -38,7 +39,7 @@ export class CustomerService {
       throw new BadRequestException('Invalid customer ID');
     }
 
-    const objectId = mongoose.Types.ObjectId.createFromHexString(id as string);
+    const objectId = new ObjectId(id);
 
     const result = await this.customerModel.deleteOne({ _id: objectId, userId });
 
