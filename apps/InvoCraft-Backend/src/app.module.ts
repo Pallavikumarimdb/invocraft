@@ -12,7 +12,6 @@ import { OnboardingModule } from './onboarding/onboarding.module';
 import { CustomerModule } from './customer/customer.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ProductModule } from './product/product.module';
-import { PaddleModule } from './paddle/paddle.module';
 
 @Module({
   imports: [
@@ -36,7 +35,6 @@ import { PaddleModule } from './paddle/paddle.module';
     CustomerModule,
     InvoiceModule,
     ProductModule,
-    PaddleModule,
   ],
   controllers: [],
   providers: [
