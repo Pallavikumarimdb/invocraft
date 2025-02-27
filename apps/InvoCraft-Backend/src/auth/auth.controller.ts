@@ -11,7 +11,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-import { UsersService } from '@/users/users.service';
+import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '@/users/dto/create-user.dto';
 import { EmailService } from '@/email/email.service';
 import { InjectModel } from '@nestjs/mongoose';
