@@ -22,7 +22,7 @@
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/types/express.d.ts"]
