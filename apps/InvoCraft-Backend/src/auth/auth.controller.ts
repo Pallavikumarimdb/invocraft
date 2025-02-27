@@ -22,7 +22,6 @@ import { ConfigService } from '@nestjs/config';
 import { Public } from '@/factories/public.factory';
 import { User } from '@/dectorators/user.decorator';
 import { AuthUser } from './strategies/jwt.strategy';
-import { GoogleOauthGuard } from './guards/google-oauth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -108,16 +107,4 @@ export class AuthController {
     return this.authService.switchTenant(user._id, tenantId);
   }
 
-  @Public()
-  @Get('google')
-  @UseGuards(GoogleOauthGuard)
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  async auth() {}
-
-  @Public()
-  @Post('google/callback')
-  @UseGuards(GoogleOauthGuard)
-  async googleAuthCallback(@Request() req) {
-    return this.authService.login(req.user);
-  }
 }
