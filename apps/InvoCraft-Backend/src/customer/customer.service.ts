@@ -20,7 +20,7 @@ export class CustomerService {
   }
 
   async getCustomerById(id: string, userId: string): Promise<Customer> {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.isValidObjectId(id)) {
       throw new BadRequestException('Invalid Customer ID');
     }
 
@@ -34,11 +34,11 @@ export class CustomerService {
 
 
   async deleteCustomer(id: string, userId: string): Promise<void> {
-    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || !mongoose.isValidObjectId(id)) {
       throw new BadRequestException('Invalid customer ID');
     }
 
-    const objectId = new Types.ObjectId(id);
+    const objectId = new mongoose.Types.ObjectId(id);
     const result = await this.customerModel.deleteOne({ _id: objectId, userId });
 
     if (result.deletedCount === 0) {
