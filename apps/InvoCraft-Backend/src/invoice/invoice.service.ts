@@ -102,8 +102,8 @@ export class InvoiceService {
     doc.on('data', buffers.push.bind(buffers));
     doc.on('end', () => {
       const pdfBuffer = Buffer.concat(buffers);
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader(
+      res.header('Content-Type', 'application/pdf');
+      res.header(
         'Content-Disposition',
         `attachment; filename=invoice_${invoiceData.invoiceNumber}.pdf`
       );
