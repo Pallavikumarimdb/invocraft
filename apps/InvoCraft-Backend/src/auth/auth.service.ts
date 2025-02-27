@@ -12,7 +12,7 @@ import { UsersService } from '../users/users.service';
 import { User } from '@/users/schemas/user.schema';
 import { AuthPayload } from './strategies/jwt.strategy';
 import { isValidObjectId } from 'mongoose';
-import { CreateUserDto } from '@/users/dto/create-user.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
