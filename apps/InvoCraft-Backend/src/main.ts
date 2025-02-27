@@ -4,7 +4,16 @@ import { ValidationPipe } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express'; // ✅ Use default import
 
+// Add these imports
+import * as tsconfig from '../tsconfig.json';
+import * as tsConfigPaths from 'tsconfig-paths';
+
 async function bootstrap() {
+  const baseUrl = './dist';
+  tsConfigPaths.register({
+    baseUrl,
+    paths: tsconfig.compilerOptions.paths || {},
+  });
   const server = express(); // ✅ No more import issues
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server)); // ✅ Ensures Express is used
 
