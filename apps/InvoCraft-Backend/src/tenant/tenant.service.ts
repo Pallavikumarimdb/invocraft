@@ -3,7 +3,7 @@ import { CreateTenantDto } from './dto/create-tenant.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Tenant, TenantDocument } from './schemas/tenant.schema';
 import { Model } from 'mongoose';
-import { UsersService } from '@/users/users.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class TenantService {

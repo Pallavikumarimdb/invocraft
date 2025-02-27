@@ -3,7 +3,7 @@ import { InvoiceService } from './invoice.service';
 import { Response } from 'express';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { Invoice } from './schemas/invoice.schema';
-import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 
 @Controller('invoices')

@@ -10,8 +10,8 @@ import {
 import { TenantService } from './tenant.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
-import { User } from '@/dectorators/user.decorator';
-import { AuthUser } from '@/auth/strategies/jwt.strategy';
+import { User } from '../dectorators/user.decorator';
+import { AuthUser } from '../auth/strategies/jwt.strategy';
 
 @Controller('tenant')
 export class TenantController {

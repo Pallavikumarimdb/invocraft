@@ -2,7 +2,7 @@ import { Body, Controller, Post, Get, Put, Param, UseGuards, Request } from '@ne
 import { OnboardingService } from './onboarding.service';
 import { OnboardingDto } from './dto/onboarding.dto';
 import { Onboarding } from './schemas/onboarding.schema';
-import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('onboarding')
 @UseGuards(JwtAuthGuard)

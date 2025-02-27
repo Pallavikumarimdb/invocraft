@@ -3,7 +3,7 @@ import { TenantService } from './tenant.service';
 import { TenantController } from './tenant.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Tenant, TenantSchema } from './schemas/tenant.schema';
-import { UsersModule } from '@/users/users.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [

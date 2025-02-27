@@ -3,7 +3,7 @@ import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Customer } from './schemas/customer.schema';
 import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
-import { Invoice } from '@/invoice/schemas/invoice.schema';
+import { Invoice } from '../invoice/schemas/invoice.schema';
 
 @Controller('customers')
 @UseGuards(JwtAuthGuard)

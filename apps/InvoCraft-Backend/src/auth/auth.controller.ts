@@ -19,8 +19,8 @@ import { EmailVerification } from './schemas/emailVerification.schema';
 import { Model } from 'mongoose';
 import { AuthService } from './auth.service';
 import { ConfigService } from '@nestjs/config';
-import { Public } from '@/factories/public.factory';
-import { User } from '@/dectorators/user.decorator';
+import { Public } from '../factories/public.factory';
+import { User } from '../dectorators/user.decorator';
 import { AuthUser } from './strategies/jwt.strategy';
 
 @Controller('auth')
