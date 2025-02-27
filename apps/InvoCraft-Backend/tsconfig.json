@@ -18,9 +18,12 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "types": [], 
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "esModuleInterop": true,
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["src/**/*.ts", "src/types/express.d.ts"]
 }
