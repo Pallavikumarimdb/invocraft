@@ -48,7 +48,7 @@ const steps = [
   { title: "Welcome", icon: Building },
   { title: "Business Type", icon: Briefcase },
   { title: "Company Name", icon: Building2 },
-  { title: "Company Logo", icon: Upload },
+  // { title: "Company Logo", icon: Upload },
   { title: "Location", icon: MapPin },
   { title: "Tax Details", icon: Receipt },
   { title: "Preview", icon: ClipboardCheck },
@@ -398,7 +398,7 @@ export default function OnboardingPage() {
                 </Card>
               )}
 
-              {step === 3 && (
+              {/* {step === 3 && (
                 <Card className="border-0 shadow-xl backdrop-blur">
                   <GlowingEffect
                     blur={0}
@@ -487,9 +487,9 @@ export default function OnboardingPage() {
                   </CardFooter>
                 </Card>
               )}
+ */}
 
-
-              {step === 4 && (
+              {step === 3 && (
                 <Card className="border-0 shadow-xl backdrop-blur">
                   <GlowingEffect
                     blur={0}
@@ -601,7 +601,7 @@ export default function OnboardingPage() {
                 </Card>
               )}
 
-              {step === 5 && (
+              {step === 4 && (
                 <Card className="border-0 shadow-xl  backdrop-blur">
                   <GlowingEffect
                     blur={0}
@@ -667,7 +667,7 @@ export default function OnboardingPage() {
                 </Card>
               )}
 
-              {step === 6 && (
+              {step === 5 && (
                 <Card className="border-0 shadow-xl backdrop-blur">
                   <GlowingEffect
                     blur={0}
