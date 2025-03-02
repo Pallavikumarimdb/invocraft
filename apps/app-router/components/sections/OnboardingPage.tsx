@@ -778,7 +778,7 @@ export default function OnboardingPage() {
                       onClick={handleGoToDashboard}
                       className="bg-blue-600 hover:bg-blue-700 text-white"
                     >
-                      {isLoading ? "Logging in..." : "Go to Dashboard →"}
+                      {isLoading ? "Logging in..." : "Go to Dashboard"}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </CardFooter>
