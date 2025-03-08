@@ -25,19 +25,19 @@ export function FeaturesSectionDemo() {
 
   ];
   return (
-    <div className="relative bg-[#030303] z-20 py-10 px-[10%] lg:py-10  mx-auto">
+    <div className="relative bg-slate-300 bg-dot-black/[0.4] relative z-10 py-20 px-[10%] lg:py-20  mx-auto">
       <div className="px-8">
-        <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black dark:text-white">
+        <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black">
         Feature-Rich, Powerful & Easy-to-Use
         </h4>
 
-        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-500 text-center font-normal dark:text-neutral-300">
+        <p className="text-lg lg:text-base  max-w-2xl  my-4 mx-auto text-slate-800 text-center font-semibold">
         Managing invoices shouldn’t be a hassle. With InvoCraft, freelancers can send professional invoices, track payments, and manage clients—all in one place.
         </p>
       </div>
 
       <div className="relative ">
-        <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 xl:border rounded-md dark:border-neutral-800">
+        <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 xl:border rounded-md dark:border-neutral-800 bg-[#030303]">
         <GlowingEffect
           blur={0}
           borderWidth={3}

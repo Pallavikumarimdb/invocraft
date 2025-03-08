@@ -6,7 +6,7 @@ import { Floating } from "./Floating";
 
 
 export function Scroll() {
-  const [imageSrc, setImageSrc] = useState("/home1.png");
+  const [imageSrc, setImageSrc] = useState("/customer.png");
   return (
     <div className=" w-full bg-slate-300 pt-16 bg-dot-black/[0.4] relative items-center justify-center">
        <div className="px-8">

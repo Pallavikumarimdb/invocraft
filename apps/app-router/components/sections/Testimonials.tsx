@@ -5,13 +5,13 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 export function Testimonials() {
   return (
-   <div className="bg-[#030303]">
+   <div className="bg-slate-300  bg-dot-black/[0.4] relative ">
      <div className="px-8 pt-20">
-        <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black dark:text-white">
+        <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black ">
         Feature-Rich, Powerful & Easy-to-Use
         </h4>
 
-        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-500 text-center font-normal dark:text-neutral-300">
+        <p className="text-lg font-semibold lg:text-base  max-w-2xl  my-4 mx-auto text-slate-800 text-center">
         Managing invoices shouldn’t be a hassle. With InvoCraft, freelancers can send professional invoices, track payments, and manage clients—all in one place.
         </p>
       </div>
@@ -65,7 +65,7 @@ interface GridItemProps {
 const GridItem = ({ area, icon, title, description }: GridItemProps) => {
   return (
     <li className={`min-h-[14rem] list-none ${area}`}>
-      <div className="relative h-full rounded-2.5xl border  p-2  md:rounded-3xl md:p-3">
+      <div className="relative h-full rounded-2.5xl border bg-slate-800  p-2  md:rounded-3xl md:p-3">
         <GlowingEffect
           blur={0}
           borderWidth={3}
@@ -75,7 +75,7 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
           proximity={64}
           inactiveZone={0.01}
         />
-        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-0.75 p-6  dark:shadow-[0px_0px_27px_0px_#2D2D2D] md:p-6">
+        <div className="relative flex h-full flex-col bg-[#030303] justify-between gap-6 overflow-hidden rounded-xl border-0.75 p-6  dark:shadow-[0px_0px_27px_0px_#2D2D2D] md:p-6">
           <div className="relative flex flex-1 flex-col justify-between gap-3">
             <div className="w-fit rounded-lg border border-gray-600 p-2 ">
               {icon}

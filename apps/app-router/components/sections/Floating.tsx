@@ -10,7 +10,7 @@ export function Floating({ setImageSrc }: { setImageSrc: (src: string) => void }
     {
       title: "Home",
       icon: <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
-      image: "/home1.png",
+      image: "/customer.png",
     },
     {
       title: "Dashboard",
@@ -20,7 +20,7 @@ export function Floating({ setImageSrc }: { setImageSrc: (src: string) => void }
     {
       title: "Customer",
       icon: <PersonStanding className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
-      image: "/customer.png",
+      image: "/home1.png",
     },
     {
       title: "Company",
